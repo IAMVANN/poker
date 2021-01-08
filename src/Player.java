@@ -10,5 +10,17 @@ public class Player {
         hand[3] = four;
         hand[4] = five;
     }
+    public int findCard(Card card){
+        for(int i = 0; i < hand.length; i++){
+            if(hand[i].getCardString().equals(card.getCardString())){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public void replaceCard(int position, Card newCard){
+        hand[position] = newCard;
+    }
+
 
 }

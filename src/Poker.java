@@ -7,7 +7,7 @@ public class Poker {
     private final String[] RANKS = {"2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"};
 
     private final Player player;
-    ArrayList<Card> Deck;
+    private ArrayList<Card> Deck;
 
     private final Scanner in;
     public Poker(){
@@ -17,17 +17,29 @@ public class Poker {
     }
 
     public void play(){
+        DeckCreation();
+        player.setCards(randomCard(),randomCard(),randomCard(),randomCard(),randomCard());
+
+
+
+
 
     }
 
-    public void DeckCreation(){
-        ArrayList<Card> Deck = new ArrayList<Card>;
+    private void DeckCreation(){
+         Deck = new ArrayList<>();
         for(String suit: SUITS){
             for(String rank: RANKS){
                 Card current = new Card(rank, suit);
                 Deck.add(current);
             }
         }
+    }
+    private Card randomCard(){
+        int x = (int)(Math.random() * Deck.size());
+        Card current = Deck.get(x);
+        Deck.remove(x);
+        return current;
     }
 
     public static void main(String[] args) {
