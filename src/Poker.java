@@ -20,6 +20,8 @@ public class Poker {
         DeckCreation();
         player.setCards(randomCard(),randomCard(),randomCard(),randomCard(),randomCard());
 
+        System.out.println(player.getHand());
+
 
 
 
