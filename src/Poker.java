@@ -20,8 +20,62 @@ public class Poker {
         DeckCreation();
         player.setCards(randomCard(),randomCard(),randomCard(),randomCard(),randomCard());
 
-        System.out.println(player.getHand());
+        System.out.println("This is your hand " + player.getHand());
+        System.out.println("How many cards would you like to trade? 0-3");
+        boolean validcards = false;
+        int tradeAmount = 0;
+        while(!validcards){
+            int i = Integer.parseInt(in.nextLine());
+            if(i >= 0 && i <=3){
+                tradeAmount = i;
+                validcards = true;
+            } else {
+                System.out.println("PLease enter a valid amount 0-3" );
+            }
+        }
 
+
+        if(tradeAmount >0){
+            System.out.println("Which card(s) would you like to trade?(Please put a comma inbetween each card and no spaces Ex.7D,JH,KC. ");
+            boolean cardAmount = false;
+            boolean cardTypes = false;
+            boolean isInHand = false;
+            Card[] cardTrade;
+            int[] cardPosition;
+            while(!cardAmount || !cardTypes){
+                String cardSwitch = in.nextLine().toUpperCase();
+                int count = cardSwitch.length() - cardSwitch.replace(",", "").length() + 1;//STACKOVERFLOW!!!!!!!! THANKS
+                if(count == tradeAmount){
+                    cardAmount = true;
+                    cardTrade=  new Card[count];
+                    cardPosition = new int[count];
+                    cardTypes = true;
+                    for(int i = 0; i < count; i++){
+                        cardTrade[i] = new Card(cardSwitch.substring(i * 3, i*3+1),cardSwitch.substring(i * 3+1, i*3+2));
+                        int cardpos = player.findCard(cardTrade[i]);
+                        if( cardpos == -1){
+                            cardTypes = false;
+                            System.out.println("Please enter valid Cards.");
+                        } else {
+                            cardPosition[i] = cardpos;
+                        }
+                    }
+                    if(cardTypes == true){
+                        for(int i = 0; i < count; i++){
+                            player.replaceCard(cardPosition[i], randomCard());
+                        }
+                    }
+
+                } else {
+                    System.out.println("Please enter the correct amount of cards");
+                }
+
+            }
+
+
+
+
+        }
 
 
 

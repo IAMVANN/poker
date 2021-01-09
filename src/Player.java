@@ -42,7 +42,7 @@ public class Player {
         sortHand();
         String x="";
         for(int i = 0; i< sortedHand.length; i++){
-            x += sortedHand[i].getCardrank() +" ";
+            x += sortedHand[i].getCardString() +" ";
             System.out.println(rankquantity[1][i]);
         }
         return x;
