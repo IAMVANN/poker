@@ -105,7 +105,7 @@ public class Poker {
             player.sortHand();
             player.counter();
             System.out.println("");
-            System.out.println("Your hand is " + player.getHand() + ". Your type is " + player.type(bet));
+            System.out.println("Your hand is " + player.getHand() + ". You got a " + player.type(bet));
             player.reseter();
 
             if(player.hasMoney() == false){

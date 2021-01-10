@@ -169,42 +169,42 @@ public class Player {
         }
         if(isRoyal && isFlush){
             chips += 100 * bet;
-            return "Royal Flush";
+            return "Royal Flush. Your very lucky.... Did you cheat? Regardless you won : " + bet * 100;
         }
         if(isStraight && isFlush){
             chips += 50 * bet;
-            return "Straight Flush";
+            return "Straight Flush. Damn, i'm gettibg broke. You won : " + bet * 50;
         }
         if(isFour){
             chips += 25 * bet;
-            return "Four of a kind : " + hand[2].getCardrank();
+            return "Four of a kind : " + hand[2].getCardrank() + ". Congrats you won : " + bet*25;
         }
         if(isTriple && isPair){
             chips += 15 * bet;
-            return "Full HOUSE!";
+            return "Full HOUSE. The house is full. You won : " + bet * 15;
         }
         if(isFlush){
             chips += 10 * bet;
-            return "Flush of " + hand[3].getCardsuit();
+            return "Flush of " + hand[3].getCardsuit() + "'s. Nice. You won : " + bet * 10;
         }
         if(isStraight){
             chips += 5 * bet;
-            return "Straight";
+            return "Straight. You won : " + bet * 5;
         }
         if(isTriple){
             chips += 3 * bet;
-            return "Triple of " + hand[2].getCardrank();
+            return "Triple of " + hand[2].getCardrank() + "'s. You won : " + bet * 3;
         }
         if(isTwoPair){
             chips += 2 * bet;
-            return "Two Pair";
+            return "Two Pair. You won : " + bet * 2;
         }
         if(isPair){
             if(isPairValue >= 11){
                 chips += bet;
-                return "Pair of " + Card.reverseSetValue(isPairValue) ;
+                return "Pair of  " + Card.reverseSetValue(isPairValue) + "'s. You won : ahh nothing. Atleast u didn't lose anything but time";
             }
-            return "LOSS!!!! Pair of " + Card.reverseSetValue(isPairValue);
+            return "YOU LOSE!!! Pair of " + Card.reverseSetValue(isPairValue) + "'s. You engluf(synoynm for suck), thanks for the money";
         }
         return "You lost!";
     }
