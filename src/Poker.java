@@ -17,7 +17,16 @@ public class Poker {
     }
 
     public void play(){
-        DeckCreation();
+        Card uno = new Card("A", "S");
+        Card dos = new Card("2", "S");
+        Card tres = new Card("4", "H");
+        Card cautro = new Card("10", "S");
+        Card cinco = new Card("10", "S");
+        player.setCards(uno, dos, tres, cautro, cinco);
+        player.sortHand();
+        player.counter();
+        System.out.println(player.type());
+        /* DeckCreation();
         player.setCards(randomCard(),randomCard(),randomCard(),randomCard(),randomCard());
 
         System.out.println("This is your hand " + player.getHand());
@@ -69,13 +78,13 @@ public class Poker {
                 } else {
                     System.out.println("Please enter the correct amount of cards");
                 }
-
             }
-
-
-
-
         }
+        player.sortHand();
+        player.counter();
+        System.out.println("");
+        System.out.println("Your hand is " + player.getHand() + ". Your type is " + player.type());*/
+
 
 
 

@@ -2,13 +2,12 @@
 
 public class Player {
     private Card[] hand = new Card[5];
-    private Card[] sortedHand = new Card[5];
     private String handType;
     private boolean isRoyal = false;
 
     private int[][] rankquantity = {
-            {0,0,0,0,0},
-            {0,0,0,0,0}
+            {0,0,0,0,0}, // [0] is cards
+            {0,0,0,0,0}  //[1] is how much cards
     };
 
     private int[] suitquantity=
@@ -23,7 +22,7 @@ public class Player {
         hand[2] = three;
         hand[3] = four;
         hand[4] = five;
-
+        sortHand();
     }
     public int findCard(Card card){
         for(int i = 0; i < hand.length; i++){
@@ -41,39 +40,37 @@ public class Player {
     public String getHand(){
         sortHand();
         String x="";
-        for(int i = 0; i< sortedHand.length; i++){
-            x += sortedHand[i].getCardString() +" ";
-            System.out.println(rankquantity[1][i]);
+        for(int i = 0; i< hand.length; i++){
+            x += hand[i].getCardString() +" ";
         }
         return x;
     }
 
     public void sortHand(){
-        sortedHand = hand;
-        for(int i = 0; i< sortedHand.length -1; i++){
-            for(int b = 0; b< sortedHand.length - i -1; b++){
-                if(sortedHand[b].getValue() > sortedHand[b+1].getValue() ){
-                    Card temp = sortedHand[b];
-                    sortedHand[b] = sortedHand[b+1];
-                    System.out.println();
-                    sortedHand[b+1] = temp;
+
+        for(int i = 0; i< hand.length -1; i++){
+            for(int b = 0; b< hand.length - i -1; b++){
+                if(hand[b].getValue() > hand[b+1].getValue() ){
+                    Card temp = hand[b];
+                    hand[b] = hand[b+1];
+                    hand[b+1] = temp;
                 }
             }
         }
-        counter();
     }
 
     public void counter(){
         int zMAX = 0;
-        for(int i = 0; i < sortedHand.length; i++){
+        for(int i = 0; i < hand.length; i++){
             boolean placed = false;
 
-            int value = sortedHand[i].getValue();
-            String suit = sortedHand[i].getCardsuit();
+            int value = hand[i].getValue();
+            String suit = hand[i].getCardsuit();
             for(int z = 0; z < zMAX; z++){
                 if(value == rankquantity[0][z]){
-                    rankquantity[1][z]++;
+                    rankquantity[1][z]++;//biggest ssuspect
                     placed = true;
+                    z = zMAX;
                 }
             }
             if(placed == false){
@@ -103,7 +100,7 @@ public class Player {
     public String type(){
         boolean isPair = false;
         int isPairValue = -1;
-        boolean isTwoPair = true;
+        boolean isTwoPair = false;
         int isTwoPairValue = -1;
         boolean isTriple = false;
         boolean isFour = false;
@@ -138,37 +135,37 @@ public class Player {
             return "Straight Flush";
         }
         if(isFour){
-            return "Four of a kind : " + sortedHand[3].getCardrank();
+            return "Four of a kind : " + hand[2].getCardrank();
         }
         if(isTriple && isPair){
             return "Full HOUSE!!!!";
         }
         if(isFlush){
-            return "Flush of " + sortedHand[3].getCardrank();
+            return "Flush of " + hand[3].getCardsuit();
         }
         if(isStraight){
             return "Straight";
         }
         if(isTriple){
-            return "Triple";
+            return "Triple of " + hand[2].getCardrank();
         }
         if(isTwoPair){
             return "Two Pair";
         }
         if(isPair){
             if(isPairValue >= 11){
-                return "Pair of " + Card.reverseSetValue(isPairValue);
+                return "Pair of " + Card.reverseSetValue(isPairValue) ;
             }
-            return "Pair of " + Card.reverseSetValue(isPairValue);
+            return "LOSS!!!! Pair of " + Card.reverseSetValue(isPairValue);
         }
         return "You lost!";
     }
     public boolean isStraight(){
-        if(sortedHand[4].getValue() == 14 && sortedHand[0].getValue() == 2 && sortedHand[1].getValue() == 3 && sortedHand[2].getValue() == 4 && sortedHand[3].getValue() == 5){
+        if(hand[4].getValue() == 14 && hand[0].getValue() == 2 && hand[1].getValue() == 3 && hand[2].getValue() == 4 && hand[3].getValue() == 5){
             return true;
-        } else if(sortedHand[4].getValue() - sortedHand[3].getValue() == 1 && sortedHand[3].getValue() - sortedHand[2].getValue() == 1  &&
-                    sortedHand[2].getValue() - sortedHand[1].getValue() == 1  && sortedHand[1].getValue() - sortedHand[0].getValue() == 1 ){
-            if(sortedHand[4].getValue() == 14 && sortedHand[0].getValue() == 10){
+        } else if(hand[4].getValue() - hand[3].getValue() == 1 && hand[3].getValue() - hand[2].getValue() == 1  &&
+                hand[2].getValue() - hand[1].getValue() == 1  && hand[1].getValue() - hand[0].getValue() == 1 ){
+            if(hand[4].getValue() == 14 && hand[0].getValue() == 10){
                 isRoyal = true;
             }
             return true;
