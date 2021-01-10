@@ -204,9 +204,9 @@ public class Player {
                 chips += bet;
                 return "Pair of  " + Card.reverseSetValue(isPairValue) + "'s. You won : ahh nothing. Atleast u didn't lose anything but time";
             }
-            return "YOU LOSE!!! Pair of " + Card.reverseSetValue(isPairValue) + "'s. You engluf(synoynm for suck), thanks for the money";
+            return "Pair of " + Card.reverseSetValue(isPairValue) + "'s. YOU LOSE!!! You engluf(synoynm for suck), thanks for the money";
         }
-        return "You lost!";
+        return "nothing. You lost";
     }
     public boolean isStraight(){
         if(hand[4].getValue() == 14 && hand[0].getValue() == 2 && hand[1].getValue() == 3 && hand[2].getValue() == 4 && hand[3].getValue() == 5){
